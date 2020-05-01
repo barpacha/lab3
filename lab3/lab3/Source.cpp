@@ -71,13 +71,11 @@ void BST<T, key>::add(T data, key _key)
 	{
 		node* prev_node = bin_insearch_add(first_node, _key);
 		if (prev_node == nullptr) return;
-		if (prev_node->key > _key)
-		{
-			node* new_node = new node;
-			prev_node->right = new_node;
-			new_node->data = data;
-			new_node->key = _key;
-		}
+		node* new_node = new node;
+		new_node->data = data;
+		new_node->key = _key;
+		if (prev_node->key < _key) prev_node->right = new_node;
+		else prev_node->left = new_node;
 	}
 	else
 	{
