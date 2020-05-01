@@ -26,4 +26,5 @@ BST<T, key>::~BST()
 
 void main()
 {
+	int g = 0;
 }
