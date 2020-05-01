@@ -26,5 +26,6 @@ BST<T, key>::~BST()
 
 void main()
 {
+	jopa;
 	int g = 0;
 }
