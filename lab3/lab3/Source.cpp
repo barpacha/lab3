@@ -91,10 +91,15 @@ void BST<T, key>::add(T data, key _key)
 		node* new_node = new node;
 		new_node->data = data;
 		new_node->key = _key;
+<<<<<<< HEAD
 		if (prev_node->key < _key)  
 			prev_node->right = new_node; 
 		else 
 			prev_node->left = new_node;
+=======
+		if (prev_node->key < _key) prev_node->right = new_node;
+		else prev_node->left = new_node;
+>>>>>>> bd663e8904d8121695e4f10faa446f046c40a1f5
 	}
 	else
 	{
