@@ -60,6 +60,14 @@ template <typename T, typename key = int> class BST
 		}
 	}
 	
+	void bin_insearch_destructor(node* sourse)
+	{
+		if (sourse->left != nullptr) bin_insearch_destructor(sourse->left);
+		if (sourse->right != nullptr) bin_insearch_destructor(sourse->right);
+		if ((sourse->left == nullptr) && (sourse->right == nullptr))
+			delete sourse;
+	}
+
 public:
 	BST();
 	~BST();
@@ -77,6 +85,8 @@ BST<T, key>::BST()
 template<typename T, typename key>
 BST<T, key>::~BST()
 {
+	if (!first_node) return;
+	bin_insearch_destructor(first_node);
 }
 
 
@@ -91,15 +101,12 @@ void BST<T, key>::add(T data, key _key)
 		node* new_node = new node;
 		new_node->data = data;
 		new_node->key = _key;
-<<<<<<< HEAD
 		if (prev_node->key < _key)  
 			prev_node->right = new_node; 
 		else 
 			prev_node->left = new_node;
-=======
 		if (prev_node->key < _key) prev_node->right = new_node;
 		else prev_node->left = new_node;
->>>>>>> bd663e8904d8121695e4f10faa446f046c40a1f5
 	}
 	else
 	{
@@ -161,7 +168,7 @@ void BST<T, key>::remove(key _key)
 			}
 			else
 				(*prev_rem_node)->right = rem_node->right;
-
+		delete prev_rem_node;
 	}
 }
 
