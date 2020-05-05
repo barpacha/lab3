@@ -83,6 +83,8 @@ public:
 	void add(T data, key _key);
 	T get(key _key);
 	void remove(key _key);
+	void add_root(T data, key _key);
+	BST& operator=(const BST &obj);
 };
 
 
@@ -147,6 +149,7 @@ template<typename T, typename key>
 void BST<T, key>::remove(key _key)
 {
 	if (_key == first_node->key)//remove root
+	{
 		if (first_node->left != nullptr)
 		{
 			if (first_node->right != nullptr)
@@ -158,6 +161,9 @@ void BST<T, key>::remove(key _key)
 		}
 		else
 			first_node = first_node->right;
+		delete first_node;
+		if (first_node->right == nullptr&&first_node->left == nullptr) first_node = nullptr;
+	}
 	else//remove node
 	{
 		node** prev_rem_node = new node*;
@@ -186,6 +192,7 @@ void BST<T, key>::remove(key _key)
 			}
 			else
 				(*prev_rem_node)->right = rem_node->right;
+		delete rem_node;
 		delete prev_rem_node;
 	}
 }
