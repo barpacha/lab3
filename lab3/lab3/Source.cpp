@@ -64,12 +64,21 @@ template <typename T, typename key = int> class BST
 	{
 		if (sourse->left != nullptr) bin_insearch_destructor(sourse->left);
 		if (sourse->right != nullptr) bin_insearch_destructor(sourse->right);
-		if ((sourse->left == nullptr) && (sourse->right == nullptr))
-			delete sourse;
+		delete sourse;
 	}
+
+	void bin_insearch_copy(node* sourse)
+	{
+		this->add(sourse->data, sourse->key);
+		if (sourse->left != nullptr) bin_insearch_copy(sourse->left);
+		if (sourse->right != nullptr) bin_insearch_copy(sourse->right);
+	}
+
+	
 
 public:
 	BST();
+	BST(BST& obj);
 	~BST();
 	void add(T data, key _key);
 	T get(key _key);
@@ -81,6 +90,15 @@ template<typename T, typename key>
 BST<T, key>::BST()
 {
 }
+
+template<typename T, typename key>
+BST<T, key>::BST(BST & obj)
+{
+	if (obj.first_node == nullptr) return;
+	bin_insearch_copy(obj.first_node);
+}
+
+
 
 template<typename T, typename key>
 BST<T, key>::~BST()
@@ -180,6 +198,8 @@ void main()
 	tree.add(247, 10000);
 	tree.add(249, 8000);
 	tree.add(251, 10);
+	BST<int> a(tree);
 	tree.remove(9000);
+	printf("%d",a.get(9000));
 	system("pause");
 }
