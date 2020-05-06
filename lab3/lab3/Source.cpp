@@ -84,7 +84,7 @@ public:
 	T get(key _key);
 	void remove(key _key);
 	void add_root(T data, key _key);
-	BST& operator=(const BST &obj);
+	BST& operator=(BST obj);
 };
 
 
@@ -197,6 +197,34 @@ void BST<T, key>::remove(key _key)
 	}
 }
 
+template<typename T, typename key>
+void BST<T, key>::add_root(T data, key _key)
+{
+	if (bin_insearch_add(first_node, _key) == nullptr) return;
+	node* new_node = new node;
+	new_node->data = data;
+	new_node->key = _key;
+	node* second_node = first_node;
+	first_node = new_node;
+	if (second_node->key > _key)
+		first_node->right = second_node;
+	else
+		first_node->left = second_node;
+}
+
+template<typename T, typename key>
+BST<T, key> &BST<T, key>::operator=(BST<T, key> obj)
+{
+	if (first_node)
+	{
+		bin_insearch_destructor(first_node);
+		first_node = nullptr;
+	}
+	if (obj.first_node)
+		bin_insearch_copy(obj.first_node);
+	return *this;
+}
+
 
 void main()
 {
@@ -206,7 +234,10 @@ void main()
 	tree.add(249, 8000);
 	tree.add(251, 10);
 	BST<int> a(tree);
+	tree.add_root(1, 1);
 	tree.remove(9000);
-	printf("%d",a.get(9000));
+	a = tree;
+	//printf("%d",a.get(9000));
+
 	system("pause");
 }
