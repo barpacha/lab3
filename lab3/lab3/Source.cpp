@@ -239,5 +239,4 @@ void main()
 	a = tree;
 	printf("%d",a.get(9000));
 	system("pause");
-	new_tree
 }
