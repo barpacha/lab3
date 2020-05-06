@@ -237,7 +237,6 @@ void main()
 	tree.add_root(1, 1);
 	tree.remove(9000);
 	a = tree;
-	//printf("%d",a.get(9000));
-
+	printf("%d",a.get(9000));
 	system("pause");
 }
